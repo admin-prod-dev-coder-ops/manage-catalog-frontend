@@ -6,78 +6,68 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import ProductDashboard from '../../../features/products/common/ProductDashboard';
+import { MenuDetailListItem } from './MenuDetailListItem';
 
 const drawerWidth = 240;
+const upperMenu = [
+  { text: 'Products', iconName: 'shopping_bag', path: '/products' }, // Add path for Products
+  { text: 'Inventory', iconName: 'inventory' },
+  { text: 'Orders', iconName: 'receipt' },
+  { text: 'Promotions', iconName: 'tag' },
+];
+const lowerMenu = [
+  { text: 'Earnings', iconName: 'attach_money' },
+  { text: 'Events', iconName: 'event' },
+  { text: 'Pay Options', iconName: 'payment' },
+  { text: 'Customers', iconName: 'group' },
+];
+
+
 
 export default function PermanentDrawerLeft() {
   return (
     <React.Fragment>
-    <div >
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Catalog Management
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar />
-        <Divider />
-        <List>
-          {['Products', 'Inventory ', 'Orders', 'Promotions'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Earnings', 'Events', 'Pay Options','Customers'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
       <div>
-        <Toolbar />
-        <Typography paragraph>
-         <ProductDashboard />
-        </Typography>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        >
+          <Toolbar>
+            <Typography variant="h6" noWrap component="div">
+              Catalog Management
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+            },
+          }}
+          variant="permanent"
+          anchor="left"
+        >
+          <Toolbar />
+          <Divider />
+          <List>      
+            <MenuDetailListItem key={upperMenu[0].text} text={upperMenu[0].text} iconName={upperMenu[0].iconName} path={upperMenu[0].path} />
+            <MenuDetailListItem key={upperMenu[1].text} text={upperMenu[1].text} iconName={upperMenu[1].iconName} />
+            <MenuDetailListItem key={upperMenu[2].text} text={upperMenu[2].text} iconName={upperMenu[2].iconName} />
+            <MenuDetailListItem key={upperMenu[3].text} text={upperMenu[3].text} iconName={upperMenu[3].iconName} />           
+          </List>
+          <Divider />
+          <List>
+            <MenuDetailListItem key={lowerMenu[0].text} text={lowerMenu[0].text} iconName={lowerMenu[0].iconName} />
+            <MenuDetailListItem key={lowerMenu[1].text} text={lowerMenu[1].text} iconName={lowerMenu[1].iconName} />
+            <MenuDetailListItem key={lowerMenu[2].text} text={lowerMenu[2].text} iconName={lowerMenu[2].iconName} />
+            <MenuDetailListItem key={lowerMenu[3].text} text={lowerMenu[3].text} iconName={lowerMenu[3].iconName} />
+          </List>
+        </Drawer>
       </div>
-    </div>
     </React.Fragment>
   );
 }
